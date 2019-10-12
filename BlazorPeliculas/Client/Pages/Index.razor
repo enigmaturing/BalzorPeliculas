@@ -5,9 +5,26 @@
 
 <p>Suma 2 + 2 = @(2+2)</p>
 
+<div>
+    <h3>Película</h3>
+    <p>Título: <b>@SpiderMan.Titulo</b></p>
+    <p>Lanzamiento: <b>@SpiderMan.Lanzameinto.ToString("dd MMM yyyy")</b></p>
+</div>
+
 @code
 {
     string nombre = "Javier";
+
+    public Pelicula SpiderMan { get { return ObtenerPelicula(); } }
+
+    public Pelicula ObtenerPelicula()
+    {
+        return new Pelicula()
+        {
+            Titulo = "Spiderman: Far from Home",
+            Lanzameinto = new DateTime(2019,7,2)
+        };
+    }
 
     private void ManejarClick()
     {
