@@ -1,0 +1,15 @@
+﻿@page "/"
+
+<p>Hola, @Enmayuscular(nombre)</p>
+<button @onclick="ManejarClick">HACER CLICK</button>
+
+@code
+{
+    string nombre = "Javier";
+    string Enmayuscular(string valor) => valor.ToUpper();
+
+    private void ManejarClick()
+    {
+        Console.WriteLine("Me han clickeado!");
+    }
+}
