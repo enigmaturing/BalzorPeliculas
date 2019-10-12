@@ -15,11 +15,21 @@
         </div>
     }
 
+    @for (var i = 0; i < Peliculas.Count; i++)
+    {
+        <div>
+            <p>@(i+1)) Título: <b>@Peliculas[i].Titulo</b></p>
+            <p>Lanzamiento: <b>@Peliculas[i].Lanzameinto.ToString("dd MMM yyyy")</b></p>
+        </div>
+    }
+
 </div>
 
 @code
 {
     string nombre = "Javier";
+
+    private List<Pelicula> Peliculas { get { return ObtenerPeliculas(); } }
 
     private List<Pelicula> ObtenerPeliculas()
     {
