@@ -18,6 +18,10 @@
     @for (var i = 0; i < Peliculas.Count; i++)
     {
         <div>
+            @if (i == Peliculas.Count - 1)
+            {
+            <p>------Esta es la última película------</p>
+            }
             <p>@(i+1)) Título: <b>@Peliculas[i].Titulo</b></p>
             <p>Lanzamiento: <b>@Peliculas[i].Lanzameinto.ToString("dd MMM yyyy")</b></p>
         </div>
