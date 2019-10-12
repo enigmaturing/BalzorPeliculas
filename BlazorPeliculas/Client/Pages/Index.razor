@@ -15,17 +15,29 @@
         </div>
     }
 
-    @for (var i = 0; i < Peliculas.Count; i++)
+    @if (Peliculas == null)
     {
-        <div>
-            @if (i == Peliculas.Count - 1)
-            {
-            <p>------Esta es la última película------</p>
-            }
-            <p>@(i+1)) Título: <b>@Peliculas[i].Titulo</b></p>
-            <p>Lanzamiento: <b>@Peliculas[i].Lanzameinto.ToString("dd MMM yyyy")</b></p>
-        </div>
+        <img src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" />
     }
+    else if (Peliculas.Count == 0)
+    {
+        <text>No hay registros para mostrar</text>
+    }
+    else
+    {
+        @for (var i = 0; i < Peliculas.Count; i++)
+        {
+            <div>
+                @if (i == Peliculas.Count - 1)
+                {
+                    <p>------Esta es la última película------</p>
+                }
+                <p>@(i + 1)) Título: <b>@Peliculas[i].Titulo</b></p>
+                <p>Lanzamiento: <b>@Peliculas[i].Lanzameinto.ToString("dd MMM yyyy")</b></p>
+            </div>
+        }
+    }
+
 
 </div>
 
@@ -33,7 +45,13 @@
 {
     string nombre = "Javier";
 
-    private List<Pelicula> Peliculas { get { return ObtenerPeliculas(); } }
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(3000);
+        Peliculas = ObtenerPeliculas();
+    }
+
+    private List<Pelicula> Peliculas;
 
     private List<Pelicula> ObtenerPeliculas()
     {
