@@ -1,6 +1,6 @@
 ﻿@page "/"
 
-<p>Hola, @Enmayuscular(nombre)</p>
+<p>Hola, @UtilidadesString.Enmayuscular(nombre)</p>
 <button @onclick="ManejarClick">HACER CLICK</button>
 
 <p>Suma 2 + 2 = @(2+2)</p>
@@ -8,7 +8,6 @@
 @code
 {
     string nombre = "Javier";
-    string Enmayuscular(string valor) => valor.ToUpper();
 
     private void ManejarClick()
     {
