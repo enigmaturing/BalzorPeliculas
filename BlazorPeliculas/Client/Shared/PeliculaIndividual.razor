@@ -1,13 +1,18 @@
 ﻿<div>
     <p>Título: <b>@Pelicula.Titulo</b></p>
     <p>Lanzamiento: <b>@Pelicula.Lanzameinto.ToString("dd MMM yyyy")</b></p>
-    <div>
-        <button @onclick="Eliminar">Borrar</button>
-    </div>
+    @if (MostrarBotones)
+    {
+        <div>
+            <button @onclick="Eliminar">Borrar</button>
+        </div>
+    }
+
 </div>
 
 @code{
     [Parameter] public Pelicula Pelicula { get; set; }
+    [Parameter] public bool MostrarBotones { get; set; }
 
     void Eliminar()
     {
