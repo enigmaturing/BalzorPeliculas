@@ -8,7 +8,15 @@ else if (Peliculas.Count == 0)
 }
 else
 {
-    <input type="checkbox" @onchange="@( () => MostrarBotones = !MostrarBotones )"/>
+    /*
+    -> Uso de Data Binding: @bind <-
+    El checkbox puede tener solo dos valures: true o false.Su valor se controla aqui usando DataBinding.
+    Para ello usamos la directiva de razor @bind y con ello queda unido en doble sentido el valor del checkbox
+    con el valor de la variable MostrarBotones.El doble sentido implica que si el usuario clickea en la
+    checkbox, la variable MostrarBotones cambia de valor, pero que también si en nuestro código cambia el
+    valor de la variable MostrarBotones, cambiará el estado de la checkbox a marcado(true) o no marcado(false)
+    */
+    <input type="checkbox" @bind=MostrarBotones/>
 
     @foreach (var pelicula in Peliculas)
     {
