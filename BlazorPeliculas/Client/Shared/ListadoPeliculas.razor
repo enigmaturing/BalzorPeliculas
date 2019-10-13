@@ -1,0 +1,40 @@
+﻿@if (Peliculas == null)
+{
+    <img src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" />
+}
+else if (Peliculas.Count == 0)
+{
+    <text>No hay registros para mostrar</text>
+}
+else
+{
+    @foreach (var pelicula in Peliculas)
+    {
+        <div>
+            <p>Título: <b>@pelicula.Titulo</b></p>
+            <p>Lanzamiento: <b>@pelicula.Lanzameinto.ToString("dd MMM yyyy")</b></p>
+        </div>
+    }
+}
+
+@code {
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(3000);
+        Peliculas = ObtenerPeliculas();
+    }
+
+    private List<Pelicula> Peliculas;
+
+    private List<Pelicula> ObtenerPeliculas()
+    {
+        return new List<Pelicula>()
+        {
+            new Pelicula(){Titulo = "Spiderman: Far from Home", Lanzameinto = new DateTime(2019,7,2) },
+            new Pelicula(){Titulo = "Moana", Lanzameinto = new DateTime(2016,11,23) },
+            new Pelicula(){Titulo = "Inception", Lanzameinto = new DateTime(2010,7,16) }
+        };
+    }
+
+}
