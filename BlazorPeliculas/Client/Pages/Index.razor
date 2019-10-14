@@ -7,21 +7,30 @@
 
 <div>
     <h3>Peliculas</h3>
-    <ListadoPeliculas Peliculas="ObtenerPeliculas()"/>
+    <ListadoPeliculas Peliculas="Peliculas"/>
 </div>
+
+<button @onclick="AgregarPelicula">Agregar Película</button>
 
 @code
 {
     string nombre = "Javier";
 
-    private List<Pelicula> ObtenerPeliculas()
+    private List<Pelicula> Peliculas;
+
+    protected override void OnInitialized()
     {
-        return new List<Pelicula>()
+        Peliculas = new List<Pelicula>()
         {
             new Pelicula(){Titulo = "Spiderman: Far from Home", Lanzameinto = new DateTime(2019,7,2) },
             new Pelicula(){Titulo = "Moana", Lanzameinto = new DateTime(2016,11,23) },
             new Pelicula(){Titulo = "Inception", Lanzameinto = new DateTime(2010,7,16) }
         };
+    }
+
+    private void AgregarPelicula()
+    {
+        Peliculas.Add(new Pelicula() { Titulo="Nueva pelicula", Lanzameinto=DateTime.Today});
     }
 
     public Pelicula SpiderMan { get { return ObtenerPelicula(); } }
