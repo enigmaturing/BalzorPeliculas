@@ -4,7 +4,7 @@
     @if (MostrarBotones)
     {
         <div>
-            <button @onclick="Eliminar">Borrar</button>
+            <button @onclick="EliminarPelicula">Borrar</button>
         </div>
     }
 
@@ -13,10 +13,5 @@
 @code{
     [Parameter] public Pelicula Pelicula { get; set; }
     [Parameter] public bool MostrarBotones { get; set; }
-
-    void Eliminar()
-    {
-        Console.WriteLine($"Eliminando la pelicula {Pelicula.Titulo}");
-    }
-
+    [Parameter] public EventCallback EliminarPelicula { get; set; }
 }

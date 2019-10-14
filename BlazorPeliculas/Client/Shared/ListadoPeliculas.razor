@@ -20,7 +20,7 @@ else
 
     @foreach (var pelicula in Peliculas)
     {
-        <PeliculaIndividual Pelicula="pelicula" MostrarBotones="MostrarBotones"/>
+        <PeliculaIndividual Pelicula="pelicula" MostrarBotones="MostrarBotones" EliminarPelicula="EliminarPelicula"/>
     }
 }
 
@@ -28,4 +28,9 @@ else
 
     [Parameter] public List<Pelicula> Peliculas { get; set; } // esto es una propiedad (con get y set). Además es pública, con lo cual se puede definir como parámetro con la directiva [Parameter], para poder pasar datos al componente
     bool MostrarBotones = false;  // esto es un campo (sin get ni set)
+
+    void EliminarPelicula()
+    {
+        Console.WriteLine("Se ha eliminado una película");
+    }
 }
