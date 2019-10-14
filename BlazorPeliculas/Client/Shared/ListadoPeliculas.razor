@@ -1,6 +1,13 @@
 ﻿@if (Peliculas == null)
 {
-    <img src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" />
+    @if (ChildContent == null)
+    {
+        <text>Cargando...</text>
+    }
+    else
+    {
+        @ChildContent
+    }
 }
 else if (Peliculas.Count == 0)
 {
@@ -27,6 +34,7 @@ else
 @code {
 
     [Parameter] public List<Pelicula> Peliculas { get; set; } // esto es una propiedad (con get y set). Además es pública, con lo cual se puede definir como parámetro con la directiva [Parameter], para poder pasar datos al componente
+    [Parameter] public RenderFragment ChildContent { get; set; }
     bool MostrarBotones = false;  // esto es un campo (sin get ni set)
 
     void EliminarPelicula(Pelicula pelicula)
