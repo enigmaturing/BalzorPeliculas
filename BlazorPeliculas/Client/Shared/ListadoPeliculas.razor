@@ -1,48 +1,16 @@
-﻿@if (Peliculas == null)
-{
-    @if (Cargando == null)
-    {
-        <text>Cargando...</text>
-    }
-    else
-    {
-        @Cargando
-    }
-}
-else if (Peliculas.Count == 0)
-{
-    @if (NoHayRegistros == null)
-    {
-        <text>No hay registros de peliculas a mostrar</text>
-    }
-    else
-    {
-        @NoHayRegistros
-    }
-}
-else
-{
-    /*
-    -> Uso de Data Binding: @bind <-
-    El checkbox puede tener solo dos valures: true o false.Su valor se controla aqui usando DataBinding.
-    Para ello usamos la directiva de razor @bind y con ello queda unido en doble sentido el valor del checkbox
-    con el valor de la variable MostrarBotones.El doble sentido implica que si el usuario clickea en la
-    checkbox, la variable MostrarBotones cambia de valor, pero que también si en nuestro código cambia el
-    valor de la variable MostrarBotones, cambiará el estado de la checkbox a marcado(true) o no marcado(false)
-    */
-    <input type="checkbox" @bind=MostrarBotones />
+﻿
+<input type="checkbox" @bind=MostrarBotones />
 
-    @foreach (var pelicula in Peliculas)
-    {
-        <PeliculaIndividual Pelicula="pelicula" MostrarBotones="MostrarBotones" EliminarPelicula="EliminarPelicula" />
-    }
-}
+<ListadoGenerico Listado="Peliculas">
+    <HayRegistros>
+        <PeliculaIndividual Pelicula="context" MostrarBotones="MostrarBotones" EliminarPelicula="EliminarPelicula"/>
+    </HayRegistros>
+</ListadoGenerico>
+
 
 @code {
 
     [Parameter] public List<Pelicula> Peliculas { get; set; } // esto es una propiedad (con get y set). Además es pública, con lo cual se puede definir como parámetro con la directiva [Parameter], para poder pasar datos al componente
-    [Parameter] public RenderFragment Cargando { get; set; }
-    [Parameter] public RenderFragment NoHayRegistros { get; set; }
     bool MostrarBotones = false;  // esto es un campo (sin get ni set)
 
     void EliminarPelicula(Pelicula pelicula)

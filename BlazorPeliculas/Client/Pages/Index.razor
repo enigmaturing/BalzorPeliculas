@@ -6,24 +6,8 @@
 <p>Suma 2 + 2 = @(2+2)</p>
 
 <div>
-    <h3>Cargando</h3>
-    <ListadoPeliculas>
-        <Cargando>
-            <img src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" />
-        </Cargando>
-        <NoHayRegistros>
-            <text>Mensaje personalizado: no hay registros</text>
-        </NoHayRegistros>
-    </ListadoPeliculas>
-    <h3>No hay peliculas</h3>
-    <ListadoPeliculas Peliculas="ObtenerPeliculas()">
-        <Cargando>
-            <img src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" />
-        </Cargando>
-        <NoHayRegistros>
-            <text>Mensaje personalizado: no hay registros</text>
-        </NoHayRegistros>
-    </ListadoPeliculas>
+    <h3>Peliculas</h3>
+    <ListadoPeliculas Peliculas="ObtenerPeliculas()"/>
 </div>
 
 @code
@@ -32,13 +16,12 @@
 
     private List<Pelicula> ObtenerPeliculas()
     {
-        return new List<Pelicula>();  // devolvemos un listado vacio de peliculas para comprobar la funcionalidad del RenderFragment
-        //return new List<Pelicula>()
-        //{
-        //    new Pelicula(){Titulo = "Spiderman: Far from Home", Lanzameinto = new DateTime(2019,7,2) },
-        //    new Pelicula(){Titulo = "Moana", Lanzameinto = new DateTime(2016,11,23) },
-        //    new Pelicula(){Titulo = "Inception", Lanzameinto = new DateTime(2010,7,16) }
-        //};
+        return new List<Pelicula>()
+        {
+            new Pelicula(){Titulo = "Spiderman: Far from Home", Lanzameinto = new DateTime(2019,7,2) },
+            new Pelicula(){Titulo = "Moana", Lanzameinto = new DateTime(2016,11,23) },
+            new Pelicula(){Titulo = "Inception", Lanzameinto = new DateTime(2010,7,16) }
+        };
     }
 
     public Pelicula SpiderMan { get { return ObtenerPelicula(); } }
