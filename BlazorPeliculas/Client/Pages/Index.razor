@@ -1,13 +1,17 @@
 ﻿@page "/"
+@inject ServicioSingleton singleton
+@inject IRepositorio  repositorio
+
+<p>EL valor del singleton es: @singleton.Valor</p>
 
 <p>Hola, @UtilidadesString.Enmayuscular(nombre)</p>
 <button @onclick="ManejarClick">HACER CLICK</button>
 
-<p>Suma 2 + 2 = @(2+2)</p>
+<p>Suma 2 + 2 = @(2 + 2)</p>
 
 <div>
     <h3>Peliculas</h3>
-    <ListadoPeliculas Peliculas="Peliculas"/>
+    <ListadoPeliculas Peliculas="Peliculas" />
 </div>
 
 <button @onclick="AgregarPelicula">Agregar Película</button>
@@ -20,17 +24,12 @@
 
     protected override void OnInitialized()
     {
-        Peliculas = new List<Pelicula>()
-        {
-            new Pelicula(){Titulo = "Spiderman: Far from Home", Lanzameinto = new DateTime(2019,7,2) },
-            new Pelicula(){Titulo = "Moana", Lanzameinto = new DateTime(2016,11,23) },
-            new Pelicula(){Titulo = "Inception", Lanzameinto = new DateTime(2010,7,16) }
-        };
+        Peliculas = repositorio.ObtenerPeliculas();
     }
 
     private void AgregarPelicula()
     {
-        Peliculas.Add(new Pelicula() { Titulo="Nueva pelicula", Lanzameinto=DateTime.Today});
+        Peliculas.Add(new Pelicula() { Titulo = "Nueva pelicula", Lanzameinto = DateTime.Today });
     }
 
     public Pelicula SpiderMan { get { return ObtenerPelicula(); } }
@@ -40,7 +39,7 @@
         return new Pelicula()
         {
             Titulo = "Spiderman: Far from Home",
-            Lanzameinto = new DateTime(2019,7,2)
+            Lanzameinto = new DateTime(2019, 7, 2)
         };
     }
 
