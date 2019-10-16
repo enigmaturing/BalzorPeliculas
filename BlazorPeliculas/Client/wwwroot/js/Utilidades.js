@@ -5,3 +5,7 @@
             console.log("conteo desde javascript " + resultado);
         });
 }
+
+function pruebaPuntoNetInstancia(dotNetHelper) {
+    dotNetHelper.invokeMethodAsync("IncrementCount");
+}

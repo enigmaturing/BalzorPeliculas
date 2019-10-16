@@ -16,7 +16,8 @@ namespace BlazorPeliculas.Client.Pages
         protected int currentCount = 0;
         static int currentCountStatic = 0;
 
-        protected async Task IncrementCount()
+        [JSInvokable]
+        public async Task IncrementCount()
         {
             currentCount++;
             Singleton.Valor = currentCount;
@@ -26,6 +27,11 @@ namespace BlazorPeliculas.Client.Pages
             // JS que he definido en root/js/Utilidades, llamada "pruebaPuntoNetStatic" esta función a su vez llamará 
             // al método de C# "ObtenerCurrentCount"
             await JS.InvokeVoidAsync("pruebaPuntoNetStatic");
+        }
+
+        protected async Task IncrementCountFromJavascript()
+        {
+            await JS.InvokeVoidAsync("pruebaPuntoNetInstancia", DotNetObjectReference.Create(this));
         }
 
         // El siguiente, es el método estático al que llamamos desde una funcion de JS en el video 30 de la seccion 3
