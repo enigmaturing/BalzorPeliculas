@@ -8,8 +8,14 @@
     </HayRegistros>
 </ListadoGenerico>
 
+<Confirmacion @ref="confirmacion" onConfirm="EliminarPeliculaConfirmacion" onCancel="onCancelConfirmacion">
+    <div>¿Desea borrar la pelicula?</div>
+</Confirmacion>
+
 
 @code {
+
+    Confirmacion confirmacion;
 
     [Parameter] public List<Pelicula> Peliculas { get; set; } // esto es una propiedad (con get y set). Además es pública, con lo cual se puede definir como parámetro con la directiva [Parameter], para poder pasar datos al componente
 
@@ -36,15 +42,33 @@
 
     bool MostrarBotones = false;  // esto es un campo (sin get ni set)
 
+    Pelicula peliculaABorrar;
+
     async Task EliminarPelicula(Pelicula pelicula)
     {
-        var confirmado = await js.Confirm("¿Desea borrar la película " + pelicula.Titulo + "?");
-        if (confirmado)
-        {
-            Peliculas.Remove(pelicula);
-            //Las dos siguientes lineas hacen lo mismo, la primera con C# y la segunda con JavaScript:
-            Console.WriteLine($"C#: Se ha eliminado una película: {pelicula.Titulo}");
-            await js.ConsoleWrite($"Javascript: Se ha borrado la pelicula: {pelicula.Titulo}");
-        }
+        peliculaABorrar = pelicula;
+        confirmacion.Mostrar();
+
+        //var confirmado = await js.Confirm("¿Desea borrar la película " + pelicula.Titulo + "?");
+        //if (confirmado)
+        //{
+        //    Peliculas.Remove(pelicula);
+        //    //Las dos siguientes lineas hacen lo mismo, la primera con C# y la segunda con JavaScript:
+        //    Console.WriteLine($"C#: Se ha eliminado una película: {pelicula.Titulo}");
+        //    await js.ConsoleWrite($"Javascript: Se ha borrado la pelicula: {pelicula.Titulo}");
+        //}
+    }
+
+    void EliminarPeliculaConfirmacion()
+    {
+        Peliculas.Remove(peliculaABorrar);
+        peliculaABorrar = null;
+        confirmacion.Ocultar();
+    }
+
+    void onCancelConfirmacion()
+    {
+        confirmacion.Ocultar();
+        peliculaABorrar = null;
     }
 }
