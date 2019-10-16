@@ -1,4 +1,5 @@
-﻿
+﻿@inject IJSRuntime js
+
 <input type="checkbox" @bind=MostrarBotones />
 
 <ListadoGenerico Listado="Peliculas">
@@ -35,9 +36,15 @@
 
     bool MostrarBotones = false;  // esto es un campo (sin get ni set)
 
-    void EliminarPelicula(Pelicula pelicula)
+    async Task EliminarPelicula(Pelicula pelicula)
     {
-        Peliculas.Remove(pelicula);
-        Console.WriteLine("Se ha eliminado una película: " + pelicula.Titulo);
+        var confirmado = await js.Confirm("¿Desea borrar la película " + pelicula.Titulo + "?");
+        if (confirmado)
+        {
+            Peliculas.Remove(pelicula);
+            //Las dos siguientes lineas hacen lo mismo, la primera con C# y la segunda con JavaScript:
+            Console.WriteLine($"C#: Se ha eliminado una película: {pelicula.Titulo}");
+            await js.ConsoleWrite($"Javascript: Se ha borrado la pelicula: {pelicula.Titulo}");
+        }
     }
 }
